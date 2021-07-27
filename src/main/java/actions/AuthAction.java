@@ -103,4 +103,21 @@ public class AuthAction extends ActionBase {
         }
     }
 
+    /**
+     *  ログアウト処理を行う
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void logout() throws ServletException, IOException {
+
+        //セッションからログイン従業員のパラメータを削除
+        removeSessionScope(AttributeConst.LOGIN_EMP);
+
+        //セッションのログアウト時のフラッシュメッセージを追加
+        putSessionScope(AttributeConst.FLUSH, MessageConst.I_LOGOUT.getMessage());
+
+        //ログアウト画面にリダイレクト
+        redirect(ForwardConst.ACT_AUTH, ForwardConst.CMD_SHOW_LOGIN);
+    }
+
 }
